@@ -16,7 +16,9 @@ opcion_2() {
     # debemos verificar que esxista el script consolidar antes de querer ejecutarlo
     if [ ! -f "$BASE_DIR/consolidar.sh" ]; then
         echo "Error: No se encuentra consolidar.sh en $BASE_DIR"
-        return
+    else
+        bash consolidar.sh &
+        
     fi
 }
 # si alguno sabe como continuar esta parte completela. falta terminar la opcion2. si la hcieron de otra forma y les funciona ponganla
@@ -26,7 +28,7 @@ opcion_3() {
     if [ -f "$ARCHIVO" ]; then
         echo "--- Lista de alumnos (Ordenado por Padron) ---"
         # -t',' indica que el separador es la coma, -k1,1n ordena por la primera columna numéricamente
-        sort -t',' -k1,1n "$ARCHIVO"
+        sort -k1,1n "$ARCHIVO"
     else
         echo "El archivo de salida ${NOMBRE_ARCHIVO}.txt no existe."
     fi
@@ -37,7 +39,8 @@ opcion_4() {
     if [ -f "$ARCHIVO" ]; then
         echo "--- Las 10 notas mass altas ---"
         # -k4,4nr ordena por la cuarta columna de forma numérica reversa (mayor a menor)
-        sort -t',' -k4,4nr "$ARCHIVO" | head -n 10
+        #sort -t',' -k4,4nr "$ARCHIVO" | head -n 10  este muestra las 10 notas mas altas icluye padron y nombre
+        awk ´{print $NF}´
     else
         echo "El archivo de salida ${NOMBRE_ARCHIVO}.txt no existe."
     fi

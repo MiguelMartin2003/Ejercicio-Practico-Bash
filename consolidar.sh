@@ -1,0 +1,12 @@
+#!/bin/bash
+
+salida="Home/EPNro1/salida/${FILENAME}.txt
+
+while true;do 
+     for archivo in "Home/EPNro1/entrada"/*.txt; do
+         if ["$archivo"]; then
+            cat "$archivo" >> "salida"
+            mv "$archivo" "Home/EPNro1/procesado/"
+         fi
+     done
+done
